@@ -10,11 +10,7 @@ spec:
   source:
     repoURL: https://github.com/cloudnative-pg/cloudnative-pg
     targetRevision: v1.25.0
-    path: docs/src/samples/helm
-    helm:
-      parameters:
-      - name: fullnameOverride
-        value: cloudnative-pg-operator
+    path: config/default
   destination:
     server: https://kubernetes.default.svc
     namespace: cnpg-system
@@ -24,4 +20,3 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
-    - ApplyOutOfSyncOnly=true
