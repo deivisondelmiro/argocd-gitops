@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/cloudnative-pg/cloudnative-pg
     targetRevision: v1.25.0
-    path: deployments/helm
+    path: docs/src/samples/helm
     helm:
       parameters:
       - name: fullnameOverride
