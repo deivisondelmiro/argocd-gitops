@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/deivisondelmiro/cinelist
     targetRevision: main
-    path: helm
+    path: helm/app
     helm:
       valueFiles:
       - values-dev.yaml

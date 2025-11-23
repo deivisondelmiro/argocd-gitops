@@ -3,14 +3,26 @@ kind: Application
 metadata:
   name: cloudnative-pg-operator
   namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
   source:
     repoURL: https://github.com/cloudnative-pg/cloudnative-pg
-    targetRevision: v1.25.0
-    path: config/default
+    targetRevision: v1.23.0
+    path: deployments/helm
+    helm:
+      parameters:
+      - name: fullnameOverride
+        value: cnpg-controller-manager
+      - name: image.registry
+        value: "ghcr.io"
+      - name: image.repository
+        value: "cloudnative-pg/cloudnative-pg"
+      - name: image.tag
+        value: "1.23.0"
+      - name: image.pullPolicy
+        value: "IfNotPresent"
   destination:
     server: https://kubernetes.default.svc
     namespace: cnpg-system
