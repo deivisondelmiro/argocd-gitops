@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cinelist-dev
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/deivisondelmiro/cinelist
+    targetRevision: main
+    path: helm/app
+    helm:
+      valueFiles:
+      - values-dev.yaml
+      parameters:
+      - name: global.environment
+        value: "dev"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cinelist-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
+  ignoreDifferences:
+  - group: batch
+    kind: Job
+    jsonPointers:
+    - /metadata/annotations
+    - /status
