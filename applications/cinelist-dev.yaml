@@ -6,7 +6,7 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: '1'
 spec:
   project: default
   source:
@@ -14,11 +14,13 @@ spec:
     targetRevision: main
     path: helm/app
     helm:
-      valueFiles:
-      - values-dev.yaml
       parameters:
       - name: global.environment
-        value: "dev"
+        value: dev
+      values: "frontend:\n  image:\n    repository: ghcr.io/deivisondelmiro/cinelist-frontend\n\
+        \    tag: \"20251123052845-a57df0a9\"\nbackend:\n  image:\n    repository:\
+        \ ghcr.io/deivisondelmiro/cinelist-backend\n    tag: \"20251123052845-a57df0a9\"\
+        \n"
   destination:
     server: https://kubernetes.default.svc
     namespace: cinelist-dev
