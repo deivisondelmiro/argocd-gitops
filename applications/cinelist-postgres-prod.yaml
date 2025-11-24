@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cinelist-postgres-prod
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/deivisondelmiro/cinelist
+    targetRevision: main
+    path: helm/postgres
+    helm:
+      valueFiles:
+      - values-prod.yaml
+      parameters:
+      - name: global.environment
+        value: "prod"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cinelist-prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+    - CreateNamespace=true
+  ignoreDifferences:
+  - group: postgresql.cnpg.io
+    kind: Cluster
+    jsonPointers:
+    - /status
