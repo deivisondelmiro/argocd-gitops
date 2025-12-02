@@ -1,8 +1,8 @@
 frontend:
   image:
     repository: ghcr.io/deivisondelmiro/cinelist-frontend
-    tag: "20251124180752-d173897e"
+    tag: "20251202222119-354c0932"
 backend:
   image:
     repository: ghcr.io/deivisondelmiro/cinelist-backend
-    tag: "20251124180752-d173897e"
+    tag: "20251202222119-354c0932"

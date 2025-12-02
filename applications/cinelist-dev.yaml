@@ -18,8 +18,8 @@ spec:
       - name: global.environment
         value: dev
       values: "frontend:\n  image:\n    repository: ghcr.io/deivisondelmiro/cinelist-frontend\n\
-        \    tag: \"20251124180752-d173897e\"\nbackend:\n  image:\n    repository:\
-        \ ghcr.io/deivisondelmiro/cinelist-backend\n    tag: \"20251124180752-d173897e\"\
+        \    tag: \"20251202222119-354c0932\"\nbackend:\n  image:\n    repository:\
+        \ ghcr.io/deivisondelmiro/cinelist-backend\n    tag: \"20251202222119-354c0932\"\
         \n"
   destination:
     server: https://kubernetes.default.svc
